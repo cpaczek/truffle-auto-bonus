@@ -1,0 +1,13 @@
+{
+  "name": "Truffle Auto Bonus",
+  "description": "Automatically collect the Truffle Bonus",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://ludwig.social/*"],
+      "js": ["content-scripts/content-script.js"],
+      "all_frames": true
+    }
+  ]
+}
