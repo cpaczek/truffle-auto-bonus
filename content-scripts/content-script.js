@@ -1,18 +1,28 @@
-//spam hello world
-let claimElementList
-let isVisibleList
-setInterval(function() {
-    //target the .claim class and click it
+setInterval(function () {
+  // Select all elements
+  const allElements = document.getElementsByTagName("*");
+  let customElements = [];
 
-    // check if .claim and .is-visible are on the same element
-    // if they are, click the .claim class
-    claimElementList = document.getElementsByClassName("claim")
-    isVisibleList = document.getElementsByClassName("is-visible")
-    for (let claimElement of claimElementList) {
-        for (let isVisibleElement of isVisibleList) {
-            if (claimElement === isVisibleElement) {
-                claimElement.click()
-            }
-        }
+  for (let i = 0; i < allElements.length; i++) {
+    // Check if the element's tag name starts with "tfl-dev"
+    if (
+      allElements[i].nodeName.includes("-") &&
+      allElements[i].nodeName.startsWith("TFL-DEV")
+    ) {
+      customElements.push(allElements[i]);
     }
-}, 5000)
+  }
+
+  for (let customElement of customElements) {
+    // Check if the web component has a shadow root
+    if (customElement.shadowRoot) {
+      let claimElementList =
+        customElement.shadowRoot.querySelectorAll(".c-button.claim");
+      console.log(claimElementList);
+
+      for (let claimElement of claimElementList) {
+        claimElement.click();
+      }
+    }
+  }
+}, 5000);
